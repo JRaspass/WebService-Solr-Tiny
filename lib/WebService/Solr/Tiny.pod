@@ -4,6 +4,11 @@
 
 WebService::Solr::Tiny - Perl interface to Apache Solr
 
+=for html
+<a href=https://travis-ci.org/JRaspass/WebService-Solr-Tiny>
+    <img src=https://api.travis-ci.org/JRaspass/WebService-Solr-Tiny.svg>
+</a>
+
 =head1 SYNOPSIS
 
  use WebService::Solr::Tiny;
