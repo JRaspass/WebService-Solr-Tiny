@@ -38,7 +38,7 @@ sub search {
     my $self = shift;
     my $url  = $self->url->clone;
 
-    $url->query_form( %{ $self->default_args}, 'q' => @_ );
+    $url->query_form( %{ $self->default_args }, 'q' => @_ );
 
     my $reply = $self->agent->get($url);
 
