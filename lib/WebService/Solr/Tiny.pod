@@ -1,0 +1,49 @@
+=encoding UTF-8
+
+=head1 NAME
+
+WebService::Solr::Tiny - Perl interface to Apache Solr
+
+=head1 SYNOPSIS
+
+ use WebService::Solr::Tiny;
+
+ my $solr = WebService::Solr::Tiny->new;
+
+ # Simple
+ $solr->search('foo');
+
+ # Complex
+ $solr->search(
+     '{!lucene q.op=AND df=text}myfield:foo +bar -baz',
+     debugQuery => 'true',
+     fl         => 'id,name,price',
+     fq         => [
+         'popularity:[10 TO *]',
+         'section:0',
+     ],
+     omitHeader => 'true',
+     rows       => 20,
+     sort       => 'inStock desc, price asc',
+     start      => 10,
+ );
+
+=head1 DESCRIPTION
+
+WebService::Solr::Tiny is similar to, and inspired by L<WebService::Solr>,
+but with an aim to be tinier.
+
+=head1 METHODS
+
+=head2 search
+
+=head1 SEE ALSO
+
+L<WebService::Solr>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright © 2015 by James Raspass
+
+This is free software; you can redistribute it and/or modify it under the
+same terms as Perl itself.
