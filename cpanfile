@@ -1,9 +1,10 @@
-requires 'Carp';
-requires 'Moo';
+configure_requires 'Module::Build::Tiny';
 
-recommends 'HTTP::Tiny';
-recommends 'JSON::MaybeXS';
-recommends 'URI';
+requires 'Carp';
+requires 'HTTP::Tiny';
+requires 'JSON::MaybeXS';
+requires 'Moo';
+requires 'URI';
 
 on test => sub {
     requires 'Test::Fatal';
