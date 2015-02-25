@@ -45,9 +45,15 @@ $solr->search(
     start      => 10,
 );
 
-is shift @requests, 'http://localhost:8983/solr/select?q=%7B!lucene+q.op%3D'
-    . 'AND+df%3Dtext%7Dmyfield%3Afoo+%2Bbar+-baz&debugQuery=true&fl=id%2Cname'
-    . '%2Cprice&fq=popularity%3A%5B10+TO+*%5D&fq=section%3A0&omitHeader=true'
-    . '&rows=20&sort=inStock+desc%2C+price+asc&start=10';
+is shift @requests, 'http://localhost:8983/solr/select'
+    . '?q=%7B!lucene+q.op%3DAND+df%3Dtext%7Dmyfield%3Afoo+%2Bbar+-baz'
+    . '&debugQuery=true'
+    . '&fl=id%2Cname%2Cprice'
+    . '&fq=popularity%3A%5B10+TO+*%5D'
+    . '&fq=section%3A0'
+    . '&omitHeader=true'
+    . '&rows=20'
+    . '&sort=inStock+desc%2C+price+asc'
+    . '&start=10';
 
 done_testing;
