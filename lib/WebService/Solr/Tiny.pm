@@ -30,7 +30,7 @@ has url => (
     default => sub {
         require URI;
 
-        URI->new('http://localhost:8983/solr/select')
+        URI->new('http://localhost:8983/solr/select');
     },
 );
 
