@@ -6,7 +6,13 @@ use WebService::Solr::Tiny;
 
 my $solr = WebService::Solr::Tiny->new;
 
-is_deeply [ sort keys %WebService::Solr::Tiny:: ], [ qw/
+my %got = %WebService::Solr::Tiny::;
+
+# AUTOLOAD seems to have disappeared between 5.16 & 5.18.
+# It is not important for this test so delete it.
+delete $got{AUTOLOAD};
+
+is_deeply [ sort keys %got ], [ qw/
     BEGIN
     BUILD
     BUILDARGS
