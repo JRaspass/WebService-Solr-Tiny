@@ -8,11 +8,9 @@ my $solr = WebService::Solr::Tiny->new;
 
 my %got = %WebService::Solr::Tiny::;
 
-# AUTOLOAD seems to have disappeared between 5.16 & 5.18.
-# It is not important for this test so delete it.
-delete $got{AUTOLOAD};
-
-is_deeply [ sort keys %got ], [ qw/
+# We only want to test what methods we've added, remove standard perl ones.
+delete @got{ qw/
+    AUTOLOAD
     BEGIN
     BUILD
     BUILDARGS
@@ -20,12 +18,17 @@ is_deeply [ sort keys %got ], [ qw/
     ISA
     VERSION
     __ANON__
+    import
+    can
+/ };
+
+# __NAMESPACE_CLEAN_STORAGE is an implementation detail because we use
+# namespace::clean, it would be nicer not to leave that in the namespace.
+is_deeply [ sort keys %got ], [ qw/
     __NAMESPACE_CLEAN_STORAGE
     agent
-    can
     decoder
     default_args
-    import
     new
     search
     url
