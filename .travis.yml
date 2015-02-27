@@ -14,3 +14,4 @@ install: cpanm -n
     Test::More
     URI
 script: prove -lv
+sudo: false
