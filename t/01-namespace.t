@@ -8,13 +8,14 @@ my $solr = WebService::Solr::Tiny->new;
 
 my %got = %WebService::Solr::Tiny::;
 
-# We only want to test what methods we've added, remove standard perl ones.
+# We only want to test what methods we've added, remove perl/Moo ones.
 delete @got{ qw/
     AUTOLOAD
     BEGIN
     BUILD
     BUILDARGS
     DEMOLISH
+    DESTROY
     ISA
     VERSION
     __ANON__
