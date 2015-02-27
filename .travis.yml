@@ -5,3 +5,12 @@ perl:
     - '5.16'
     - '5.14'
     - '5.12'
+install: cpanm -n
+    HTTP::Tiny
+    JSON::MaybeXS
+    Moo
+    Test::Fatal
+    Test::MockObject
+    Test::More
+    URI
+script: prove -lv
