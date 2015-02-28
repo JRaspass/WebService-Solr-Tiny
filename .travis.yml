@@ -12,6 +12,6 @@ install: cpanm -n
     Test::Fatal
     Test::MockObject
     Test::More
-    URI
+    URI::Query::FromHash
 script: prove -lv
 sudo: false

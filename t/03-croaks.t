@@ -17,6 +17,6 @@ $agent->set_always(
 
 my $solr = WebService::Solr::Tiny->new( agent => $agent );
 
-is exception { $solr->search() },
+is exception { $solr->search },
     'Solr request failed - Solr had a boo boo at ' .
     __FILE__ . ' line ' . ( __LINE__ - 2 ) . ".\n";

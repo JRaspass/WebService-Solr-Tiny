@@ -2,6 +2,7 @@ package WebService::Solr::Tiny 0.001;
 
 use Carp 'croak';
 use Moo;
+use URI::Query::FromHash;
 
 use namespace::clean;
 
@@ -25,22 +26,13 @@ has decoder => (
 
 has default_args => ( is => 'ro', default => sub { {} } );
 
-has url => (
-    is      => 'ro',
-    default => sub {
-        require URI;
-
-        URI->new('http://localhost:8983/solr/select');
-    },
-);
+has url => ( is => 'ro', default => 'http://localhost:8983/solr/select' );
 
 sub search {
     my $self = shift;
-    my $url  = $self->url->clone;
+    my %args = ( %{ $self->default_args }, 'q' => @_ ? @_ : '' );
 
-    $url->query_form( %{ $self->default_args }, 'q' => @_ );
-
-    my $reply = $self->agent->get($url);
+    my $reply = $self->agent->get( $self->url . '?' . hash2query %args );
 
     croak "Solr request failed - $reply->{content}" unless $reply->{success};
 
