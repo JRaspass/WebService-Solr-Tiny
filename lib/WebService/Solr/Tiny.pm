@@ -22,7 +22,7 @@ sub new {
     }
 
     $self->{default_args} //= {};
-    $self->{url} //= 'http://localhost:8983/solr/select';
+    $self->{url}          //= 'http://localhost:8983/solr/select';
 
     $self;
 }
