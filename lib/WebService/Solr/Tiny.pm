@@ -40,7 +40,7 @@ sub search {
         Carp::croak("Solr request failed - $reply->{content}");
     }
 
-    $self->{decoder}->( $reply->{content} );
+    $self->{decoder}( $reply->{content} );
 }
 
 1;
