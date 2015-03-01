@@ -9,7 +9,7 @@ my $solr = WebService::Solr::Tiny->new;
 my %got = %WebService::Solr::Tiny::;
 
 # We only want to test what methods we've added, remove perl ones.
-delete @got{ qw/BEGIN VERSION import/ };
+delete @got{ qw/AUTOLOAD BEGIN VERSION import/ };
 
 # __NAMESPACE_CLEAN_STORAGE is an implementation detail because we use
 # namespace::clean, it would be nicer not to leave that in the namespace.
