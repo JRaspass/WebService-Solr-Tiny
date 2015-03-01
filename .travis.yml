@@ -5,9 +5,8 @@ perl:
     - '5.16'
     - '5.14'
     - '5.12'
-install: cpanm -n
-    HTTP::Tiny
-    JSON::MaybeXS
+install: cpanm -n --skip-satisfied
+    JSON::PP
     Moo
     Test::Fatal
     Test::MockObject

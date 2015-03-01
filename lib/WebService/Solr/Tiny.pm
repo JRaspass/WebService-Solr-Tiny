@@ -18,9 +18,9 @@ has agent => (
 has decoder => (
     is      => 'ro',
     default => sub {
-        require JSON::MaybeXS;
+        require JSON::PP;
 
-        \&JSON::MaybeXS::decode_json;
+        \&JSON::PP::decode_json;
     },
 );
 
