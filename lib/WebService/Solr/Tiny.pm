@@ -1,42 +1,46 @@
 package WebService::Solr::Tiny 0.001;
 
-use Carp 'croak';
-use Moo;
-use URI::Query::FromHash;
+use strict;
+use warnings;
 
-use namespace::clean;
+use URI::Query::FromHash ();
 
-has agent => (
-    is      => 'ro',
-    default => sub {
+sub new {
+    my $class = shift;
+    my $self  = bless {@_}, $class;
+
+    unless ( exists $self->{agent} ) {
         require HTTP::Tiny;
 
-        HTTP::Tiny->new( keep_alive => 1 );
-    },
-);
+        $self->{agent} = HTTP::Tiny->new( keep_alive => 1 );
+    }
 
-has decoder => (
-    is      => 'ro',
-    default => sub {
+    unless ( exists $self->{decoder} ) {
         require JSON::PP;
 
-        \&JSON::PP::decode_json;
-    },
-);
+        $self->{decoder} = \&JSON::PP::decode_json;
+    }
 
-has default_args => ( is => 'ro', default => sub { {} } );
+    $self->{default_args} //= {};
+    $self->{url} //= 'http://localhost:8983/solr/select';
 
-has url => ( is => 'ro', default => 'http://localhost:8983/solr/select' );
+    $self;
+}
 
 sub search {
     my $self = shift;
-    my %args = ( %{ $self->default_args }, 'q' => @_ ? @_ : '' );
+    my %args = ( %{ $self->{default_args} }, 'q' => @_ ? @_ : '' );
 
-    my $reply = $self->agent->get( $self->url . '?' . hash2query %args );
+    my $reply = $self->{agent}->get(
+        $self->{url} . '?' . URI::Query::FromHash::hash2query(%args) );
 
-    croak "Solr request failed - $reply->{content}" unless $reply->{success};
+    unless ( $reply->{success} ) {
+        require Carp;
 
-    $self->decoder->( $reply->{content} );
+        Carp::croak("Solr request failed - $reply->{content}");
+    }
+
+    $self->{decoder}->( $reply->{content} );
 }
 
 1;

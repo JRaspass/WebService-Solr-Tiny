@@ -8,29 +8,10 @@ my $solr = WebService::Solr::Tiny->new;
 
 my %got = %WebService::Solr::Tiny::;
 
-# We only want to test what methods we've added, remove perl/Moo ones.
-delete @got{ qw/
-    AUTOLOAD
-    BEGIN
-    BUILD
-    BUILDARGS
-    DEMOLISH
-    DESTROY
-    ISA
-    VERSION
-    __ANON__
-    import
-    can
-/ };
+# We only want to test what methods we've added, remove perl ones.
+delete @got{ qw/BEGIN VERSION import/ };
 
 # __NAMESPACE_CLEAN_STORAGE is an implementation detail because we use
 # namespace::clean, it would be nicer not to leave that in the namespace.
-is_deeply [ sort keys %got ], [ qw/
-    __NAMESPACE_CLEAN_STORAGE
-    agent
-    decoder
-    default_args
-    new
-    search
-    url
-/ ], "package doesn't leave too many imports in it";
+is_deeply [ sort keys %got ], [ qw/new search/ ],
+    'package only has "new" and "search" methods';

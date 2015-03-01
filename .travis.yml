@@ -6,10 +6,8 @@ perl:
     - '5.14'
 install: cpanm -n --skip-satisfied
     JSON::PP
-    Moo
     Test::Fatal
     Test::MockObject
-    Test::More
     URI::Query::FromHash
 script: prove -lv
 sudo: false
