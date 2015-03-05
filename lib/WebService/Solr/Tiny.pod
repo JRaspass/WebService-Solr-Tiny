@@ -11,7 +11,7 @@ WebService::Solr::Tiny - Perl interface to Apache Solr
 
 =head1 SYNOPSIS
 
- use WebService::Solr::Tiny;
+ use WebService::Solr::Tiny 'solr_escape';
 
  my $solr = WebService::Solr::Tiny->new;
 
@@ -24,6 +24,7 @@ WebService::Solr::Tiny - Perl interface to Apache Solr
      debugQuery => 'true',
      fl         => 'id,name,price',
      fq         => [
+         'foo:"' . solr_escape($foo) . '"',
          'popularity:[10 TO *]',
          'section:0',
      ],
@@ -37,6 +38,13 @@ WebService::Solr::Tiny - Perl interface to Apache Solr
 
 WebService::Solr::Tiny is similar to, and inspired by L<WebService::Solr>,
 but with an aim to be tinier.
+
+=head1 FUNCTIONS
+
+=head2 solr_escape
+
+Exportable on request, C<solr_escape> is a small utility subroutine for
+escaping characters that have meaning in Lucene query syntax.
 
 =head1 METHODS
 
