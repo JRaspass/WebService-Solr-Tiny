@@ -3,7 +3,7 @@ package WebService::Solr::Tiny 0.001;
 use strict;
 use warnings;
 
-use URI::Query::FromHash ();
+use URI::Query::FromHash 0.003;
 
 sub import {
     no strict 'refs';
@@ -39,8 +39,7 @@ sub search {
     my $self = shift;
     my %args = ( %{ $self->{default_args} }, 'q' => @_ ? @_ : '' );
 
-    my $reply = $self->{agent}->get(
-        $self->{url} . '?' . URI::Query::FromHash::hash2query(%args) );
+    my $reply = $self->{agent}->get( $self->{url} . '?' . hash2query %args );
 
     unless ( $reply->{success} ) {
         require Carp;
@@ -50,5 +49,7 @@ sub search {
 
     $self->{decoder}( $reply->{content} );
 }
+
+no URI::Query::FromHash;
 
 1;
