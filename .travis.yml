@@ -5,9 +5,11 @@ perl:
     - '5.16'
     - '5.14'
 install: cpanm -n --skip-satisfied
+    Devel::Cover::Report::Coveralls
     JSON::PP
     Test::Fatal
     Test::MockObject
     URI::Query::FromHash
-script: prove -lv
+script: PERL5OPT=-MDevel::Cover prove -lv
 sudo: false
+after_success: cover -report coveralls
