@@ -50,10 +50,19 @@ but with an aim to be tinier.
 
 =head1 FUNCTIONS
 
+The functions in this section are exportable on request.
+
 =head2 solr_escape
 
-Exportable on request, C<solr_escape> is a small utility subroutine for
-escaping characters that have meaning in Lucene query syntax.
+C<solr_escape> is a small utility subroutine for escaping characters that
+have meaning in Lucene query syntax.
+
+=head2 solr_query
+
+C<solr_query> aims to make it easier for users of L<WebService::Solr> to
+migrate to this distribution. It takes the same arguments as the constructor
+of a L<WebService::Solr::Query> object, and returns a string that is
+equivalent to stringifying that object.
 
 =head1 METHODS
 
