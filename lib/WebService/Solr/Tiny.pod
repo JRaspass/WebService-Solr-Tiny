@@ -5,8 +5,8 @@
 WebService::Solr::Tiny - Perl interface to Apache Solr
 
 =for html
-<a href=https://travis-ci.org/JRaspass/WebService-Solr-Tiny>
-    <img src=https://api.travis-ci.org/JRaspass/WebService-Solr-Tiny.svg>
+<a href=https://github.com/JRaspass/WebService-Solr-Tiny/actions/workflows/test.yml>
+    <img src=https://github.com/JRaspass/WebService-Solr-Tiny/actions/workflows/test.yml/badge.svg>
 </a>
 <a href=https://coveralls.io/r/JRaspass/WebService-Solr-Tiny>
     <img src=https://coveralls.io/repos/JRaspass/WebService-Solr-Tiny/badge.svg>
