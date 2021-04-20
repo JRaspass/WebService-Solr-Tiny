@@ -12,7 +12,7 @@ WebService::Solr::Tiny - Perl interface to Apache Solr
     <img src=https://coveralls.io/repos/JRaspass/WebService-Solr-Tiny/badge.svg>
 </a>
 <a href=https://metacpan.org/pod/WebService::Solr::Tiny>
-    <img src=https://img.shields.io/cpan/v/WebService::Solr::Tiny.svg>
+    <img src=https://img.shields.io/cpan/v/WebService-Solr-Tiny.svg>
 </a>
 <a href=https://github.com/JRaspass/WebService-Solr-Tiny/issues>
     <img src=https://img.shields.io/github/issues/JRaspass/WebService-Solr-Tiny.svg>
