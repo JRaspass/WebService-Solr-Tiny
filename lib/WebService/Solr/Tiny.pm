@@ -12,18 +12,10 @@ our @EXPORT_OK = 'solr_escape';
 sub new ( $class, %args ) {
     my $self = bless \%args, $class;
 
-    unless ( exists $self->{agent} ) {
-        require HTTP::Tiny;
-
-        $self->{agent} = HTTP::Tiny->new( keep_alive => 1 );
-    }
-
-    unless ( exists $self->{decoder} ) {
-        require JSON::PP;
-
-        $self->{decoder} = \&JSON::PP::decode_json;
-    }
-
+    $self->{agent}        //=
+        do { require HTTP::Tiny; HTTP::Tiny->new( keep_alive => 1 ) };
+    $self->{decoder}      //=
+        do { require JSON::PP; \&JSON::PP::decode_json };
     $self->{default_args} //= {};
     $self->{url}          //= 'http://localhost:8983/solr/select';
 
