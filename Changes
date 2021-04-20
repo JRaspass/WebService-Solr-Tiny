@@ -1,2 +1,5 @@
+0.002 ???
+    - Modernise and simplify the code, Perl 5.20 is now required.
+
 0.001 2015-09-07
     - Initial release.

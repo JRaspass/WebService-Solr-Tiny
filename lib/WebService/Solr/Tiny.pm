@@ -1,21 +1,16 @@
-package WebService::Solr::Tiny 0.001;
+package WebService::Solr::Tiny 0.002;
 
-use strict;
+use v5.20;
 use warnings;
+use experimental qw/postderef signatures/;
 
+use Exporter 'import';
 use URI::Query::FromHash 0.003;
 
-sub import {
-    no strict 'refs';
+our @EXPORT_OK = 'solr_escape';
 
-    *{ caller . '::solr_escape' }
-        = sub { $_[0] =~ s/([\Q+-&|!(){}[]^"~*?:\\\E])/\\$1/gr }
-        if grep $_ eq 'solr_escape', @_;
-}
-
-sub new {
-    my $class = shift;
-    my $self  = bless {@_}, $class;
+sub new ( $class, %args ) {
+    my $self = bless \%args, $class;
 
     unless ( exists $self->{agent} ) {
         require HTTP::Tiny;
@@ -35,11 +30,9 @@ sub new {
     $self;
 }
 
-sub search {
-    my $self = shift;
-    my %args = ( %{ $self->{default_args} }, 'q' => @_ ? @_ : '' );
-
-    my $reply = $self->{agent}->get( $self->{url} . '?' . hash2query %args );
+sub search ( $self, $q = '', %args ) {
+    my $reply = $self->{agent}->get( $self->{url} . '?' .
+        hash2query { $self->{default_args}->%*, 'q' => $q, %args } );
 
     unless ( $reply->{success} ) {
         require Carp;
@@ -49,6 +42,8 @@ sub search {
 
     $self->{decoder}( $reply->{content} );
 }
+
+sub solr_escape ( $q ) { $q =~ s/([\Q+-&|!(){}[]^"~*?:\\\E])/\\$1/gr }
 
 no URI::Query::FromHash;
 
