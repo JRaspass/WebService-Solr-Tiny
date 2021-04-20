@@ -32,7 +32,7 @@ sub new ( $class, %args ) {
 
 sub search ( $self, $q = '', %args ) {
     my $reply = $self->{agent}->get( $self->{url} . '?' .
-        hash2query { $self->{default_args}->%*, 'q' => $q, %args } );
+        hash2query { $self->{default_args}->%*, q => $q, %args } );
 
     unless ( $reply->{success} ) {
         require Carp;
