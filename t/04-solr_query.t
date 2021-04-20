@@ -1,8 +1,4 @@
-use Test::More;
-
-use strict;
-use warnings;
-
+use Test2::V0;
 use WebService::Solr::Tiny 'solr_query';
 
 subtest 'Basic queries' => sub {

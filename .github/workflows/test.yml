@@ -30,6 +30,6 @@ jobs:
 
       - run: perl -v
 
-      - run: cpanm -n Test::Fatal Test::MockObject URI::Query::FromHash
+      - run: cpanm -n Test2::V0 URI::Query::FromHash
 
       - run: prove -lv
