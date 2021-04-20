@@ -1,0 +1,4 @@
+author = "James Raspass <jraspass@gmail.com>"
+license = "perl_5"
+name = "WebService-Solr-Tiny"
+version = "0.001"
