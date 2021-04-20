@@ -66,7 +66,59 @@ equivalent to stringifying that object.
 
 =head1 METHODS
 
+=head2 new
+
+Construct a new WebService::Solr::Tiny instance. The constructor takes the
+following parameters:
+
+=over
+
+=item C<agent>
+
+The HTTP user-agent to use to make the requests. Defaults to an L<HTTP::Tiny>
+instance.
+
+=item C<decoder>
+
+A code reference to use for decoding responses. Defaults to using
+C<decode_json> from L<JSON::PP>.
+
+=item C<default_args>
+
+A hash reference with default parameters that will be passed along as part of
+every request. The values in this hash will be merged with those passed to
+C<search>. Defaults to an empty hash reference.
+
+=item C<url>
+
+The URL of the collection requests will be sent to. Defaults to
+C<http://localhost:8983/solr/select>.
+
+=back
+
 =head2 search
+
+Sends a request to Solr. Takes a string to be used as a Solr query, and an
+optional list of key-value pairs to be used as additional query parameters to
+qualify the request.
+
+The query defaults to the empty string, and will be passed as the C<q> query
+parameter. No special protections are in place to prevent any of the additional
+arguments from overwriting this.
+
+If any value has been set as part of the C<default_args> in the constructor,
+these will be merged with the arguments to this function.
+
+The final set of parameters will be converted to a query parameter string
+using L<URI::Query::FromHash>. See that module's documentation for more
+details about how these values will be processed.
+
+In the event of a failure of any kind, this function will croak with the
+content of the response.
+
+On success, the full content of the response will be passed to the code ref
+specified in the C<decoder> parameter to the constructor, and the result of
+this will be this method's return value.
 
 =head1 PERFORMANCE
 
