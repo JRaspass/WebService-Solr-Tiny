@@ -1,4 +1,5 @@
-0.002 ???
+{{ $NEXT }}
+
     - Modernise and simplify the code, Perl 5.20 is now required.
     - Add documentation for search and constructor parameters
     - Add solr_query function to facilitate migration from WebService::Solr
