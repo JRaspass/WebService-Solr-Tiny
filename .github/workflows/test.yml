@@ -28,6 +28,8 @@ jobs:
         with:
           perl-version: ${{ matrix.perl }}
 
+      - run: perl -v
+
       - run: cpanm -n Test::Fatal Test::MockObject URI::Query::FromHash
 
       - run: prove -lv
