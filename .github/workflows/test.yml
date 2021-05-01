@@ -36,7 +36,7 @@ jobs:
 
       - run: perl -v
 
-      - run: cpanm -n Test2::V0 URI::Query::FromHash
+      - run: cpanm --installdeps -n .
 
       - if: ${{ !matrix.cover }}
         run: prove -lv
