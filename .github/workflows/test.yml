@@ -12,6 +12,9 @@ jobs:
   build:
     strategy:
       matrix:
+        include:
+          - cover: true
+            perl: '5.32'
         perl:
           - '5.20'
           - '5.22'
@@ -19,7 +22,6 @@ jobs:
           - '5.26'
           - '5.28'
           - '5.30'
-          - '5.32'
 
     runs-on: ubuntu-latest
 
@@ -36,4 +38,13 @@ jobs:
 
       - run: cpanm -n Test2::V0 URI::Query::FromHash
 
-      - run: prove -lv
+      - if: ${{ !matrix.cover }}
+        run: prove -lv
+
+      - if: ${{ matrix.cover }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cpanm -n Devel::Cover::Report::Coveralls
+          PERL5OPT=-MDevel::Cover prove -lv
+          cover -report coveralls
