@@ -1,4 +1,8 @@
-{{ $NEXT }}
+{{$NEXT}}
+
+    - Tweaks to minting process
+
+0.002
 
     - Modernise and simplify the code, Perl 5.20 is now required.
     - Add documentation for search and constructor parameters
